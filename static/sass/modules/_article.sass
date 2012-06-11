@@ -1,0 +1,46 @@
+article
+  time
+    :font-weight bold
+  p
+    :margin 10px 0
+    :color #000
+  .date, .by
+    :font-size 13px
+    time, div
+      :display inline
+      :color #000
+      :font-weight bold
+.articles, .reviews, .interviews
+  ol
+    :margin-right -20px
+  li
+    :display inline-block
+    :margin-bottom 40px
+    :margin-right 20px
+    &:nth-child(2n)
+      :margin-right 0
+    article
+      :width 460px
+    header, .content
+      :display inline-block
+      :vertical-align top
+      :position relative
+    .content
+      :width 315px
+
+.news
+  ol
+    :margin-right -20px
+  li
+    :display inline-block
+    :width 300px
+    :margin-right 16px
+    :margin-bottom 40px
+    h3
+      :font-size 26px
+      :line-height 105%
+    article
+      :border-right 4px solid #666
+    &:hover
+      article
+        :border-right 4px solid #000

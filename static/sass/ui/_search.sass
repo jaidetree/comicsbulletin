@@ -1,0 +1,21 @@
+.l-header
+  .search
+    text-align: right
+    input
+      color: #fff
+      padding: 15px
+      &[type="text"]
+        background: #474747
+        @include border-radius-left()
+        border: none
+        width: 70px
+        @include transition(width, 500ms, ease)
+        &:focus
+          width: 150px
+      &[type="submit"]
+        border: none
+        margin-left: -5px
+        background: #6c150a
+        width: 40px
+        text-indent: -999px
+        @include border-radius-right()

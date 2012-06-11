@@ -1,0 +1,33 @@
+.tabs
+  nav
+    :background #7f1212
+    li
+      :display inline-block
+      :margin-left 5px
+      :color #fff
+      :border-top 4px solid #7f1212
+      a
+        :color #fff
+        :padding 10px 5px
+        :display block
+      &.active
+        :border-top 4px solid #ddd
+        a
+          :background #fff
+          :color #000
+      &:hover
+        :background #e5e5e5
+        :border-top 4px solid #e5e5e5
+        a
+          :color #444
+  .header
+    :margin-bottom 20px
+    a
+      :color #606060
+      :font-size 12px
+      &:last-child
+        :float right
+  section
+    :display none
+    &.active
+      :display block
