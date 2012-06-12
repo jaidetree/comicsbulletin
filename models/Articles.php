@@ -26,7 +26,10 @@ class Articles extends Model
 
         while( $row = APP::$db->fetch($result) )
         {
+            if( $row['type'] == "review" )
+            {
 
+            }
             $this->_data[] = $row;
             $this->count++;
         }
