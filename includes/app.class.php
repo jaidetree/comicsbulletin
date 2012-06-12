@@ -9,6 +9,8 @@ class APP
     static $urls = array();
     static $controllers = array();
 
+    public static $db;
+
     public static function cfg($section, $key)
     {
         return self::$data[$section][$key];
