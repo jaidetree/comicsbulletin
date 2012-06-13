@@ -77,9 +77,9 @@ class DataBase
 	function build_fetch_query( $a )
 	{
 		$this->build_query( $a );
-		$this->run_query();
+		$result = $this->run_query();
 		
-		return $this->fetch();
+		return $this->fetch($result);
 
 	}
 	
@@ -95,7 +95,7 @@ class DataBase
 	function run_query()
 	{
 		$result = $this->query( $this->sql );
-		$this->sql = '';
+		//$this->sql = '';
 		
 		
 		return $result;

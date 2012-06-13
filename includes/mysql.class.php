@@ -128,15 +128,52 @@ class MySQL extends DataBase
 		}
 		return true;
 	}
+
+    function build_where($where)
+    {
+        $statement = " WHERE";
+        foreach( $where as $item )
+        {
+            $str = " ";
+            /**
+             * Is this item a table name?
+             */
+            if( preg_match('/([_a-z]+)\.([_a-z]+)/', $item, $vars) )
+            {
+                $str .= $vars[1] . ".`" . $vars[2] . "`";
+            }
+
+            elseif( preg_match('/^[=\<\>]+$/', $item, $vars) )
+            {
+                $str .= $vars[0];
+            }
+            elseif( $item == "LIKE" || $item == "IS NULL" || $item == "IS NOT NULL" )
+            {
+                $str .= $item;
+            }
+            elseif( preg_match('/[_a-z]+_[_a-z]+/', $item, $vars) )
+            {
+                $str .= "`" . $item . "`";
+            }
+            else
+            {
+                $str .= "'" . $item . "'";
+            }
+
+            $statement .= $str;
+        }
+
+        return $statement;
+    }
 	
-	function select($table, $select = '*', $where = '', $order,  $group = '', $limit = '', $count = false) 
+	function select($table, $select = '*', $where = array(), $order,  $group = '', $limit = '', $count = false) 
 	{
 		$query = "SELECT $select FROM `$table`";
 		
 		
 		if( $where )
 		{
-			$query .= " WHERE " . $where;
+			$query .= $this->build_where($where);
 		}
 		
 		if( is_array( $order ) )
@@ -192,7 +229,7 @@ class MySQL extends DataBase
 		
 	}
 	
-	function start_select($table, $select = '*', $where = '')
+	function start_select($table, $select = '*', $where = array())
 	{
 		if( is_array( $table ) )
 		{
@@ -207,7 +244,7 @@ class MySQL extends DataBase
 		
 		if( $where )
 		{
-			$this->sql .= " WHERE $where";
+			$this->sql .= $this->build_where($where);
 		}
 	}
 	
@@ -251,7 +288,7 @@ class MySQL extends DataBase
 		}
 		
 		if( $where )
-			$this->sql .= "\nWHERE $where";
+			$this->sql .= "\n" . $this->build_where($where);
 	}
 	
 	function start_update($table, $vars, $where = '')

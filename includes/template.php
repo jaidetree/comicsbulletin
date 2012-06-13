@@ -12,7 +12,13 @@ function render($file, $args=array())
     $output = ob_get_contents();
     ob_end_clean();
 
-    return $output;
+    if( ERROR::has_errors() )
+    {
+        return $output;
+    }else{
+        ERROR::display_errors();
+        return false;
+    }
 }
 function static_url()
 {
