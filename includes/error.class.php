@@ -19,6 +19,7 @@ class ERROR
         {
             return;
         }
+        ob_clean();
         echo "<pre>";
         echo "<h1>ERRORS:</h1>";
         print_r( self::$errors );

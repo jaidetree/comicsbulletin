@@ -13,9 +13,14 @@ class Model
 
         while( $row = APP::$db->fetch() )
         {
-            $this->_data[] = $row;
-            $this->count++;
+            $this->add_item( $row );
         }
+    }
+
+    public function add_item($item)
+    {
+        $this->_data[] = $item;
+        $this->count++;
     }
 
     public function all()
@@ -47,6 +52,11 @@ class Model
         $this->index++;
 
         return $row;
+    }
+
+    public function first()
+    {
+        return $this->_data[0];
     }
 }
 ?>

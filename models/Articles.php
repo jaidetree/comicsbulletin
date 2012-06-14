@@ -35,16 +35,33 @@ class Articles extends Model
             if( $row['type'] == "review" )
             {
                 /**
-                 * Reviewer Field
+                 * Review Fields
                  */
-                $reviewer = APP::$db->build_fetch_query(array(
-                    'select' => 'field_reviewer_value',
-                    'from' => DB_PRE . 'field_data_field_reviewer',
-                    'where' => array( 'entity_id', '=', $row['nid'] )
-                ));
+                $reviewers = new Field('reviewer', $row['nid']);
+                $row['author'] = $reviewers->all();
 
-                print_r( APP::$db->sql );
-                $row['author'] = $reviewer['field_reviewer_value'];
+                $rating = new Field('review_rating', $row['nid']);
+                $row['rating'] = $rating->first();
+
+                $type = new Field('review_type', $row['nid']);
+                $row['type'] = $type->first();
+            }
+            /**
+             * Column Data
+             */
+            elseif( $row['type'] == "column" )
+            {
+                /**
+                 * Columnist 
+                 */
+                $data = new Field('columnist', $row['nid']);
+                $row['columnist'] = $data->all();
+
+                /**
+                 * Logo
+                 */
+                $data = new Field('column_series', $row['nid']);
+                $row['column_series'] = $data->first();
             }
             $this->_data[] = $row;
             $this->count++;
