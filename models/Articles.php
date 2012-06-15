@@ -55,13 +55,41 @@ class Articles extends Model
                  * Columnist 
                  */
                 $data = new Field('columnist', $row['nid']);
-                $row['columnist'] = $data->all();
+                $row['author'] = $data->all();
 
                 /**
                  * Logo
                  */
                 $data = new Field('column_series', $row['nid']);
                 $row['column_series'] = $data->first();
+
+                /**
+                 * Column Logo
+                 */
+            }
+            /**
+             * Interview Data
+             */
+            elseif( $row['type'] == "interview" )
+            {
+
+                $data = new Field("interviewer", $row['nid']);
+                $row['author'] = $data->all();
+
+                $data = new Field("interviewee", $row['nid']);
+                $row['interviewee'] = $data->all();
+                
+                $data = new Field("interview_type", $row['nid']);
+                $row['type'] = $data->first();
+
+            }
+            /**
+             * News
+             */
+            elseif( $row['type'] == "news" )
+            {
+                $data = new Field("news_type", $row['nid'])
+                $row['type'] = $data->first();
             }
             $this->_data[] = $row;
             $this->count++;
