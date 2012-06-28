@@ -1,7 +1,8 @@
 <?php
-class Articles extends Model
+class Articles extends Manager
 {
-    public function __construct($index=0, $count=10, $args = array())
+    var $model = 'Article';
+    public function __construct($index=0, $count=10, $model = "", $args = array())
     {
         $this->query = array(
             'select' => 'n.*', 
@@ -10,7 +11,7 @@ class Articles extends Model
                 array(
                     'from' => array(DB_PRE . 'field_data_body' => 'b'),
                     'on' => 'b.`entity_id` = n.`nid`',
-                    'select' => 'b.body_value'
+                    'select' => 'b.body_value, b.body_summary'
                 ),
             ),
             'limit' => "$index,$count",
@@ -88,7 +89,7 @@ class Articles extends Model
              */
             elseif( $row['type'] == "news" )
             {
-                $data = new Field("news_type", $row['nid'])
+                $data = new Field("news_type", $row['nid']);
                 $row['type'] = $data->first();
             }
             $this->_data[] = $row;
@@ -96,5 +97,31 @@ class Articles extends Model
         }
     }
 
+}
+class Article extends Model
+{
+    public function __construct($data)
+    {
+        parent::__construct($data);
+    }
+
+    public function author()
+    {
+        echo join(', ', (array)$this->author);
+    }
+
+    public function the_summary($length)
+    {
+        if( $this->body_summary )
+        {
+            echo $this->body_summary;
+            return;
+        }
+
+        $words = explode( ". ", $this->body_value );
+
+        echo implode( ". ", array_slice( $words, 0, $length ) ) . ".";
+
+    }
 }
 ?>

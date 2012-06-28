@@ -1,5 +1,5 @@
 <?php 
-class Field extends Model
+class Field extends Manager
 {
     var $field_name = "";
 

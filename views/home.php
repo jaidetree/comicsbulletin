@@ -8,96 +8,20 @@
     <div class="row">
         <section class="topstories">
             <ol>
+                <?php while( $articles->has_rows() ): $article = $articles->row(); ?>
                 <li>
                     <img src="/tmp/th/primary.png" width="140" />
                     <article>
                         <header>
-                            <h2><span>Review:</span> RED SONJA #60</h2>
+                            <h2><?php $article->the('title') ?></h2>
                             <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
+                                <span class="author">By: <?php $article->author() ?></span>
+                            </div><!-- .details -->
                         </header>
-                        <div class="content">
-                            <p>There's a lot to recommend in this issue of Red Sonja. First and foremost, writer Eric Trautmann, emphasizes once again that Sonja is a true woman and not a mandrake root come to life.</p>
-                        </div><!-- .content -->
+                        <div class="content"><?php $article->the_summary(2) ?></div>
                     </article>
                 </li>
-                <li>
-                    <img src="/tmp/th/primary.png" />
-                    <article>
-                        <header>
-                            <h2><span>Review:</span>Chuck 5.05 &ldquo;Chuck vs. the Hack-Off&rdquo;</h2>
-                            <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
-                        </header>
-                        <div class="content">
-                            <p>Enjoyable. That’s the first word that popped into my head when I thought about this episode of Chuck.</p>
-                        </div><!-- .content -->
-                    </article>
-                </li>   
-                <li>
-                    <img src="/tmp/th/primary.png" />
-                    <article>
-                        <header>
-                            <h2><span>Review:</span>Chuck 5.05 &ldquo;Chuck vs. the Hack-Off&rdquo;</h2>
-                            <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
-                        </header>
-                        <div class="content">
-                            <p>Enjoyable. That’s the first word that popped into my head when I thought about this episode of Chuck.</p>
-                        </div><!-- .content -->
-                    </article>
-                </li>   
-                <li>
-                    <img src="/tmp/th/primary.png" />
-                    <article>
-                        <header>
-                            <h2><span>Review:</span>Chuck 5.05 &ldquo;Chuck vs. the Hack-Off&rdquo;</h2>
-                            <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
-                        </header>
-                        <div class="content">
-                            <p>Enjoyable. That’s the first word that popped into my head when I thought about this episode of Chuck.</p>
-                        </div><!-- .content -->
-                    </article>
-                </li>   
-                <li>
-                    <img src="/tmp/th/primary.png" />
-                    <article>
-                        <header>
-                            <h2><span>Review:</span>Chuck 5.05 &ldquo;Chuck vs. the Hack-Off&rdquo;</h2>
-                            <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
-                        </header>
-                        <div class="content">
-                            <p>Enjoyable. That’s the first word that popped into my head when I thought about this episode of Chuck.</p>
-                        </div><!-- .content -->
-                    </article>
-                </li>  
-                <li>
-                    <img src="/tmp/th/primary.png" />
-                    <article>
-                        <header>
-                            <h2><span>Review:</span>Chuck 5.05 &ldquo;Chuck vs. the Hack-Off&rdquo;</h2>
-                            <div class="details">
-                                <span class="rating 6-stars"></span>
-                                <span class="author">By: Ray Tate</span>
-                            </div>
-                        </header>
-                        <div class="content">
-                            <p>Enjoyable. That’s the first word that popped into my head when I thought about this episode of Chuck.</p>
-                        </div><!-- .content -->
-                    </article>
-                </li>  
+                <?php endwhile; ?>
             </ol>
         </section>
     </div>

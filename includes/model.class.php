@@ -1,62 +1,35 @@
-<?php 
+<?php
 class Model
 {
-    protected $query = array();
-    protected $_data = array();
-    protected $index = 0;
-    protected $count = 0;
+    private $_data = array();
 
-    public function get($args=array())
+    public function __construct($data=array())
     {
-        $query = array_merge($this->query, $args);
-        APP::$db->build_run_query($query);
+        $this->build_data( $data );
+    }
 
-        while( $row = APP::$db->fetch() )
+    private function build_data($data_array)
+    {
+        foreach( $data_array as $key => $value )
         {
-            $this->add_item( $row );
+            $this->$key = $value;
         }
     }
 
-    public function add_item($item)
+    public function __get($key)
     {
-        $this->_data[] = $item;
-        $this->count++;
+        return $this->_data[$key];
     }
 
-    public function all()
+    public function __set($key, $value)
     {
-        return $this->_data;
+        $this->_data[ $key ] = $value;
     }
 
-    public function have_rows()
-    {
-        if( $this->count > 0 && $this->index < $this->count )
-        {
-            return true;
-        }
-        else
-        {
-            $this->reset_index();
-            return false;
-        }
-    }
 
-    public function reset_index()
+    public function the($key)
     {
-        $this->index = 0;
-    }
-
-    public function row()
-    {
-        $row = $this->_data[ $this->index ];
-        $this->index++;
-
-        return $row;
-    }
-
-    public function first()
-    {
-        return $this->_data[0];
+        echo $this->_data[$key];
     }
 }
 ?>
