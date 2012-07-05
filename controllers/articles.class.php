@@ -49,8 +49,8 @@ class ArticlesController extends Controller
     }
     function news()
     {
-        $articles = new Articles(0, 10, array('where' => array( 'n.type', '=', 'news' )));
-        return render('articles', array( 'class' => 'news', 'title' => 'News', 'articles' => $articles ) );
+        $articles = new Articles(0, 20, array('where' => array( 'n.type', '=', 'news' )));
+        return render('news', array( 'class' => 'news', 'title' => 'News', 'articles' => $articles ) );
     }
 }
 ?>

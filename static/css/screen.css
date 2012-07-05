@@ -264,8 +264,9 @@ article .date, article .by {
     display: inline;
     color: black;
     font-weight: bold; }
-article .details span {
-  color: #666666; }
+article .details {
+  font-size: 12px;
+  color: #443333; }
 
 .articles ol, .reviews ol, .interviews ol {
   margin-right: -20px; }
@@ -284,40 +285,40 @@ article .details span {
   .articles li .content, .reviews li .content, .interviews li .content {
     width: 315px; }
 
-.news ol {
+.home .news ol {
   margin-right: -20px; }
-.news li {
+.home .news li {
   display: inline-block;
   vertical-align: top;
   width: 300px;
   margin-right: 16px;
   margin-bottom: 40px; }
-  .news li h3 {
+  .home .news li h3 {
     font-size: 26px;
     line-height: 105%; }
-  .news li article {
+  .home .news li article {
     border-right: 4px solid #666666;
     padding-right: 10px;
     height: 150px; }
-    .news li article span {
+    .home .news li article span {
       display: block; }
-  .news li:hover article {
+  .home .news li:hover article {
     border-right: 4px solid black; }
 
-.articles li article, .comics li article, .tv li article, .movies li article, .games li article, .reviews li article, .interviews li article {
-  width: 620px;
-  border-bottom: 1px solid #999999;
-  padding-bottom: 30px; }
-  .articles li article header .cover, .comics li article header .cover, .tv li article header .cover, .movies li article header .cover, .games li article header .cover, .reviews li article header .cover, .interviews li article header .cover {
-    width: 140px;
-    height: auto; }
-  .articles li article .content, .comics li article .content, .tv li article .content, .movies li article .content, .games li article .content, .reviews li article .content, .interviews li article .content {
-    width: 440px;
-    margin-left: 5px;
-    font-size: 14px; }
-    .articles li article .content .details, .comics li article .content .details, .tv li article .content .details, .movies li article .content .details, .games li article .content .details, .reviews li article .content .details, .interviews li article .content .details {
-      font-size: 14px;
-      color: #555555; }
+.articles li, .comics li, .tv li, .movies li, .games li, .reviews li, .interviews li {
+  margin-bottom: 5px; }
+  .articles li article, .comics li article, .tv li article, .movies li article, .games li article, .reviews li article, .interviews li article {
+    width: 620px;
+    border-bottom: 1px solid #999999; }
+    .articles li article header .cover, .comics li article header .cover, .tv li article header .cover, .movies li article header .cover, .games li article header .cover, .reviews li article header .cover, .interviews li article header .cover {
+      width: 140px;
+      height: auto; }
+    .articles li article .content, .comics li article .content, .tv li article .content, .movies li article .content, .games li article .content, .reviews li article .content, .interviews li article .content {
+      width: 440px;
+      margin-left: 5px;
+      font-size: 14px; }
+      .articles li article .content .details span, .comics li article .content .details span, .tv li article .content .details span, .movies li article .content .details span, .games li article .content .details span, .reviews li article .content .details span, .interviews li article .content .details span {
+        display: block; }
 
 .reviews li article header .cover {
   width: 160px;
@@ -521,6 +522,27 @@ section.featured {
 #page-columns .columns li {
   margin-bottom: 40px;
   text-align: center; }
+
+#page-news .news li {
+  display: block;
+  border-left: 5px solid #444444;
+  margin-bototm: 0;
+  padding: 10px 0px 20px 20px; }
+  #page-news .news li:hover {
+    border-left: 5px solid black;
+    background: #961d0f;
+    color: white; }
+    #page-news .news li:hover h2, #page-news .news li:hover a {
+      color: white; }
+    #page-news .news li:hover .details {
+      color: #e0e0e0; }
+  #page-news .news li h2 {
+    font-size: 40px;
+    line-height: 90%; }
+  #page-news .news li img {
+    width: 120px;
+    height: auto;
+    display: none; }
 
 .l-header .search {
   text-align: right; }

@@ -11,4 +11,15 @@ function slugify($str)
     $str = str_replace(' ', '-', $str);
     return $str;
 }
+
+function is_page($controller)
+{
+   $test_url = APP::url($controller);
+   $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+   if( $url == $test_url )
+   {
+       echo "active ";
+   }
+}
 ?>

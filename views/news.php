@@ -1,9 +1,9 @@
 <?php echo render('_header'); ?>
-<div class="grid" id="page-articles">
+<div class="grid" id="page-news">
     <div class="row">
         <section class="main col-8">
-            <h1><?php echo $title ?></h1>
-            <div class="articles <?php echo $class ?>">
+            <h1>News</h1>
+            <div class="news">
                 <ol>
                     <?php while( $articles->has_rows() ): $article = $articles->row(); ?>
                     <li>
@@ -13,7 +13,6 @@
                             </header>
                             <div class="content">
                                 <h2><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h2>
-                                <p><?php $article->the_summary(1); ?></p>
                                 <div class="details">
                                     <span><?php $article->the_type(); ?></span> 
                                     <span><?php $article->author(); ?> <strong><?php $article->the('pub_date'); ?></strong> <?php $article->the('totalcount'); ?> Views</span>

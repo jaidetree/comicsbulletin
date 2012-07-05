@@ -11,8 +11,8 @@ article
       :color #000
       :font-weight bold
   .details
-    span
-      :color #666
+    :font-size 12px
+    :color #433
 .articles, .reviews, .interviews
   ol
     :margin-right -20px
@@ -31,34 +31,35 @@ article
     .content
       :width 315px
 
-.news
-  ol
-    :margin-right -20px
-  li
-    :display inline-block
-    :vertical-align top
-    :width 300px
-    :margin-right 16px
-    :margin-bottom 40px
-    h3
-      :font-size 26px
-      :line-height 105%
-    article
-      :border-right 4px solid #666
-      :padding-right 10px
-      :height 150px
-      span
-        :display block
-    &:hover
+.home
+  .news
+    ol
+      :margin-right -20px
+    li
+      :display inline-block
+      :vertical-align top
+      :width 300px
+      :margin-right 16px
+      :margin-bottom 40px
+      h3
+        :font-size 26px
+        :line-height 105%
       article
-        :border-right 4px solid #000
+        :border-right 4px solid #666
+        :padding-right 10px
+        :height 150px
+        span
+          :display block
+      &:hover
+        article
+          :border-right 4px solid #000
 
 .articles, .comics, .tv, .movies, .games, .reviews, .interviews
   li
+    :margin-bottom 5px
     article
       :width 620px
       :border-bottom 1px solid #999
-      :padding-bottom 30px
       header
         .cover
           :width 140px
@@ -68,8 +69,8 @@ article
         :margin-left 5px
         :font-size 14px
         .details
-          :font-size 14px
-          :color #555
+          span
+            :display block
 
 .reviews
   li
@@ -83,3 +84,4 @@ article
 .archive
   li
     :margin-bottom 40px
+
