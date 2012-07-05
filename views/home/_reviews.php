@@ -2,96 +2,23 @@
     <div class="row">
         <div class="col-12">
             <ol>
+                <?php while($reviews->has_rows()): $article = $reviews->row(); ?>
                 <li>
                     <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
+                        <header style="background: url(<?php $article->the('cover_image'); ?>);">
+                            <a href="<?php $article->url(); ?>"><span class="rating"><img src="<?php $article->rating_image(); ?>" alt="<?php $article->the('rating') ?>" /></span></a>
                         </header>
                         <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
+                            <h2><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h2>
+                            <p><?php $article->the_summary(1); ?></p>
+                            <div class="by">Reviewd by <?php $article->author(); ?></div>
                             <div class="date">
-                                Medium <time>Comic</time>
+                                <?php $article->the_type(); ?>
                             </div>
                         </div>
                     </article>
                 </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
-                            <div class="date">
-                                Medium <time>Comic</time>
-                            </div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
-                            <div class="date">
-                                Medium <time>Comic</time>
-                            </div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
-                            <div class="date">
-                                Medium <time>Comic</time>
-                            </div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
-                            <div class="date">
-                                Medium <time>Comic</time>
-                            </div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><span class="rating"><img src="/tmp/ratings/star5.png" width="110" alt="5 star Rating" /></span><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Naughty and Nice: The Good Girl Art of Bruce Timm</a></h3>
-                            <p>Wow, Bruce Timm draws some amazingly sexy women!</p>
-                            <div class="by">Review <div>Karyn Pinter</div> <div>Jason Sacks</div></div>
-                            <div class="date">
-                                Medium <time>Comic</time>
-                            </div>
-                        </div>
-                    </article>
-                </li>    
+                <?php endwhile; ?>
             </ol>
         </div><!-- .col-12 -->
     </div><!-- .row -->

@@ -346,7 +346,7 @@ class Articles extends Manager
             $data = new ImageFields('image', $row['nid']);
             $row['image'] = $data->first();
             $data = new ImageFields('cover_image', $row['nid']);
-            $row['cover_image'] = $data->first();
+            $row['cover_image'] = str_replace( ' ', '%20', $data->first() );
 
             $row['details'] = array();
 

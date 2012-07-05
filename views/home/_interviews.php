@@ -2,78 +2,20 @@
     <div class="row">
         <div class="col-12">
             <ol>
+                <?php while( $interviews->has_rows() ): $article = $interviews->row(); ?>
                 <li>
                     <article>
                         <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
+                            <a href="<?php $article->url(); ?>"><img src="<?php $article->the('cover_image'); ?>" alt="<?php $article->the('title'); ?> Thumbnail" /></a>
                         </header>
                         <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
+                            <h3><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h3>
+                            <p><?php $article->the_summary(1); ?></p>
+                            <div class="by"><?php $article->the_interviewee(); ?> Interviewed by <?php $article->author(); ?></div>
                         </div>
                     </article>
                 </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
-                        </div>
-                    </article>
-                </li>    
-                <li>
-                    <article>
-                        <header>
-                            <a href="/articles/article.html"><img src="/tmp/th/secondary.png" width="140" height="190" alt="Review Thumbnail" /></a>
-                        </header>
-                        <div class="content">
-                            <h3><a href="/articles/article.html">Todd McFarlane: No More Spaghetti Webbing</a></h3>
-                            <p>When Image took on the Big Two, no one came away with more success than him.</p>
-                            <div class="by"><div>Todd McFarlane</div> Interview with <div>Jason Sacks</div></div>
-                        </div>
-                    </article>
-                </li>    
+                <?php endwhile; ?>
             </ol>
         </div><!-- .col-12 -->
     </div><!-- .row -->

@@ -44,17 +44,13 @@
                     <li><a href="#!/reviews">Latest Reviews</a></li>
                     <li><a href="#!/interviews">Recent Interviews</a></li>
                     <li><a href="#!/news">Fresh News</a></li>
-                    <li><a href="#!/today">Today&rsquo;s Popular Articles</a></li>
-                    <li><a href="#!/alltime">All Time Popular Articles</a></li>
                 </ul>
             </nav>
         </div><!-- .row -->
         <?php echo render('home/_columns.php', array('columns' => $columns)); ?> 
-        <?php render('pages/home/_reviews.php'); ?> 
-        <?php render('pages/home/_interviews.php'); ?> 
-        <?php render('pages/home/_news.php'); ?> 
-        <?php render('pages/home/_pop_today.php'); ?> 
-        <?php render('pages/home/_pop_alltime.php'); ?> 
+        <?php echo render('home/_reviews.php', array('reviews' => $reviews)); ?> 
+        <?php echo render('home/_interviews.php', array('interviews' => $interviews)); ?> 
+        <?php echo render('home/_news.php', array('news' => $news)); ?> 
     </div><!-- .secondary -->
     <div class="row community">
         <div class="col-6">
