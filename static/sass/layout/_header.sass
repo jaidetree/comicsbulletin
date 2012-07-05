@@ -6,7 +6,7 @@
 
 .l-nav
   background: #303030
-  font-size: 13px
+  font-size: 12px
   .row
     margin: 0
   ul
@@ -34,11 +34,12 @@
         overflow: hidden
         visibility: hidden
         @include transition(all, 500ms, ease)
+        :z-index 600
         li
           display: block
           margin: 0
           a
-            font-size: 12px
+            font-size: 11px
             padding: 8px
             border-bottom: 1px solid #252525
             &:hover
@@ -52,7 +53,7 @@
   :font-size 0
   :text-align right
   :height 18px
-  :margin-top 5px
+  :margin-top 9px
   li
     :display inline-block
     :vertical-align middle
@@ -62,18 +63,18 @@
     &:first-child
       :margin-left 0
   a
-    :width 28px
-    :height 28px
+    :width 20px
+    :height 20px
     :text-indent -999px
     :overflow hidden
     :background #444
     :padding 0
     :display block
-    :background url(/images/social_icons.png)
+    :background url(/static/images/social_icons.png)
     &.fb
-      :background-position 0 -41px
+      :background-position 0 -29px
     &.tw
-      :background-position 0 -84px
+      :background-position 0 -60px
     &.tb
-      :background-position 0 -125px
+      :background-position 0 -89px
 

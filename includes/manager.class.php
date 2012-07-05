@@ -5,6 +5,7 @@ class Manager
     protected $_data = array();
     protected $index = 0;
     protected $count = 0;
+    protected $model = "";
 
     public function get($args=array())
     {
@@ -48,7 +49,14 @@ class Manager
 
     public function row()
     {
-        $row = new $this->model( $this->_data[ $this->index ] );
+        if( $this->model ) 
+        {
+            $row = new $this->model( $this->_data[ $this->index ] );
+        }
+        else
+        {
+            $row = $this->_data[ $this->index ];
+        }
         $this->index++;
 
         return $row;

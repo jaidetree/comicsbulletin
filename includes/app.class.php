@@ -43,9 +43,9 @@ class APP
         }
     }
 
-    public static function add_controller( $object )
+    public static function add_controller( $name, $object )
     {
-        $name = strtolower( get_class($object ) );
+        $name = strtolower( $name );
         self::$controllers[ $name ] = &$object;
     }
 
@@ -72,13 +72,13 @@ class APP
      */
     public static function url($path, $args=array())
     {
-        foreach( self::$urls as $route )
+        foreach( self::$urls as $idx => $route )
         {
-            if( $route[1] == $path )
+            if( $route[1] === $path )
             {
                 $url = $route[0];
-                $url = preg_replace("/\(.*\)/", "%s", $url);
-                $url = preg_replace('/[\[\]^\$]/', "", $url);
+                $url = preg_replace("/(\(.+\)+)/Ums", "%s", $url);
+                $url = preg_replace('/[\[\]^\$\?]/', "", $url);
 
                 if( ( is_array($args) && sizeof($args) > 0 ) || is_numeric($args) )
                 {
@@ -87,11 +87,26 @@ class APP
 
                 $url = preg_replace('/\/$/', '', $url) . '/';
 
-                return 'http://' . $_SERVER['HTTP_HOST'] . $url;
+                if( $url == "/" )
+                {
+                    $url = "";
+                }
+
+                return 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
 
             }
         }
 
+        return "#error";
+    }
+
+    public static function drupal_url($path)
+    {
+        return 'http://' . self::cfg('dr', 'url_base') . $path;
+    }
+    public static function disqus_url($path)
+    {
+        return str_replace('/', '\\/', 'http://' . self::cfg('dr', 'url_base') .  $path);
     }
 
 }

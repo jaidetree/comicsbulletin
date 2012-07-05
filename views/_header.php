@@ -4,7 +4,7 @@
         <title>Comics Bulletin</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="<?php static_url(); ?>css/screen.css" media="screen">
-        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
     </head>
     <body>
         <header class="l-header">
@@ -25,7 +25,7 @@
         <nav class="l-nav">
             <div class="grid">
                 <div class="row">
-                    <?php render('_nav.php'); ?>
+                    <?php echo render('_nav.php'); ?>
                 </div><!-- .row -->
             </div><!-- .grid -->
         </nav>

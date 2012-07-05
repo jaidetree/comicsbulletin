@@ -50,9 +50,10 @@ while( ($file = $dir->read()) !== false )
     }
     require_once $controller_dir . $file;
     $name = ucwords(basename($file, ".class.php"));
-    $object = new $name();
+    $class_name = $name . "Controller";
+    $object = new $class_name();
 
-    APP::add_controller($object);
+    APP::add_controller($name, $object);
 }
 
 /**

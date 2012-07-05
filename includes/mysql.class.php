@@ -132,6 +132,10 @@ class MySQL extends DataBase
     function build_where($where)
     {
         $statement = " WHERE";
+        if( ! is_array( $where ) )
+        {
+            return $statement . " " . $where;
+        }
         foreach( $where as $item )
         {
             $str = " ";
@@ -151,9 +155,13 @@ class MySQL extends DataBase
             {
                 $str .= $item;
             }
-            elseif( preg_match('/[_a-z]+_[_a-z]+/', $item, $vars) )
+            elseif( preg_match('/^([_a-z]+_[_a-z]|[_\w]+id)+$/', $item, $vars) )
             {
                 $str .= "`" . $item . "`";
+            }
+            elseif( preg_match("/^'.*'$/", $item ) )
+            {
+                $str .= $item;
             }
             else
             {
@@ -337,7 +345,7 @@ class MySQL extends DataBase
 		}
 		else
 		{
-			if( preg_match( "#[`a-zA-Z0-9_]+ [A-Z0-9]+#", $order ) )
+			if( preg_match( "#^[`a-zA-Z0-9_]+ [A-Z0-9]+$#", $order ) )
 			{ 
 				$pieces = explode(" ", $order);
 				$pieces[0] = strstr( $pieces[0], "`") ? $pieces[0] : "`$pieces[0]`";
@@ -737,4 +745,3 @@ class MySQL extends DataBase
 	}
 }
 ?>
-

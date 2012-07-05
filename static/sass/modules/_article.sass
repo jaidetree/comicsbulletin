@@ -10,6 +10,9 @@ article
       :display inline
       :color #000
       :font-weight bold
+  .details
+    span
+      :color #666
 .articles, .reviews, .interviews
   ol
     :margin-right -20px
@@ -44,3 +47,34 @@ article
     &:hover
       article
         :border-right 4px solid #000
+
+.articles, .comics, .tv, .movies, .games, .reviews, .interviews
+  li
+    article
+      :width 620px
+      :border-bottom 4px solid #999
+      :padding-bottom 30px
+      header
+        .cover
+          :width 140px
+          :height auto
+      .content
+        :width 440px
+        :margin-left 5px
+        :font-size 14px
+        .details
+          :font-size 14px
+          :color #555
+
+.reviews
+  li
+    article
+      header
+        .cover
+          :width 160px
+          :height auto
+      .content
+        :width 420px
+.archive
+  li
+    :margin-bottom 40px

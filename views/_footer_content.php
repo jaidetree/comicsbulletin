@@ -9,17 +9,17 @@
 <div class="row">
     <nav class="col-10">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/">Comics</a></li>
-            <li><a href="/">TV</a></li>
-            <li><a href="/">Movies</a></li>
-            <li><a href="/">Games</a></li>
-            <li><a href="/">Reviews</a></li>
-            <li><a href="/">Columns</a></li>
-            <li><a href="/">Interviews</a></li>
-            <li><a href="/">Podcast</a></li>
-            <li><a href="/">News</a></li>
-            <li><a href="/">Archives</a></li>
+            <li><a href="<?php echo APP::url('pages.home') ?>">Home</a></li>
+            <li><a href="<?php echo APP::url('articles.comics') ?>">Comics</a></li>
+            <li><a href="<?php echo APP::url('articles.tv') ?>">TV</a></li>
+            <li><a href="<?php echo APP::url('articles.movies') ?>">Movies</a></li>
+            <li><a href="<?php echo APP::url('articles.games') ?>">Games</a></li>
+            <li><a href="<?php echo APP::url('articles.reviews') ?>">Reviews</a></li>
+            <li><a href="<?php echo APP::url('articles.columns') ?>">Columns</a></li>
+            <li><a href="<?php echo APP::url('articles.interviews') ?>">Interviews</a></li>
+            <li><a href="<?php echo APP::url('pages.podcasts') ?>">Podcast</a></li>
+            <li><a href="<?php echo APP::url('articles.news') ?>">News</a></li>
+            <li><a href="<?php echo APP::url('pages.archive') ?>">Archives</a></li>
         </ul>
     </nav>
     <ul class="social-links col-2">
@@ -31,34 +31,10 @@
 </div><!-- .row -->
 <div class="row columns">
     <ul class="col-12">
-        <li><a href="#/columns/burning-mind">Burning Mind</a></li>
-        <li><a href="#/columns/busted-knuckles">Busted Knuckles</a></li>
-        <li><a href="#/columns/cheap-thrills">Cheap Thrills</a></li>
-        <li><a href="#/columns/cinebooks">Cinebooks</a></li>
-        <li><a href="#/columns/classic-comis">Classic Comics</a></li>
-        <li><a href="#/columns/classic-film">Classic Film</a></li>
-        <li><a href="#/columns/comics-bulletin">Comics Bulletin</a></li>
-        <li><a href="#/columns/comic-effect">Comic Effect</a></li>
-        <li><a href="#/columns/grind">Comics Grind and Rewind</a></li>
-        <li><a href="#/columns/coolartbro">Cool Art, Bro</a></li>
-        <li><a href="#/columns/fool">Fool Britannia</a></li>
-        <li><a href="#/columns/kids">For Kids and Tweens</a></li>
-        <li><a href="#/columns/full">Full Run</a></li>
-        <li><a href="#/columns/infinite-ammo">Infinite Ammo</a></li>
-        <li><a href="#/columns/kate">Kate or Die</a></li>
-        <li><a href="#/columns/killingjokes">Killing Jokes</a></li>
-        <li><a href="#/columns/manifesto">Manifesto</a></li>
-        <li><a href="#/columns/mission">Mission Professional</a></li>
-        <li><a href="#/columns/mondo">Mondo Marvel</a></li>
-        <li><a href="#/columns/paneleducation">Panel Education</a></li>
-        <li><a href="#/columns/shotgun">Riding Shotgun</a></li>
-        <li><a href="#/columns/std">Saunders Talks Disease</a></li>
-        <li><a href="#/columns/wheel">Squeaky Wheel</a></li>
-        <li><a href="#/columns/tate">Tate Necessarily So</a></li>
-        <li><a href="#/columns/topten">Tuesday Top Ten</a></li>
-        <li><a href="#/columns/what">What Do You Really Know About Comics?</a></li>
-        <li><a href="#/columns/good">What Looks Good</a></li>
-        <li><a href="#/columns/zeitgeist">Z.E.I.T.G.E.I.S.T.</a></li>
+        <?php $columns = Columns::all(); ?>
+        <?php while( $columns->has_rows() ): $column = $columns->row(); ?>
+        <li><a href="<?php echo APP::url('articles.column', array( $column->slug )); ?>"><?php $column->the('title') ?></a></li>
+        <?php endwhile; ?>
     </ul>
 </div><!-- .row .columns -->
 <div class="row attribution">
@@ -66,6 +42,6 @@
         <p class="copyright">&copy; 2012 Comics Bulletin</p>
     </div>
     <div class="col-5 credits">
-        Powered by <a href="http://drupal.com">Drupal</a> | Designed by <a href="http://xugostudios.com/">Xugo Studios</a>
+        Designed by <a href="http://xugostudios.com/" target="_blank">Xugo Studios</a>
     </div>
 </div><!-- .row .attribution -->

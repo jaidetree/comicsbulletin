@@ -19,8 +19,6 @@
                             <span class="type"><?php $article->the_type(); ?></span>
                             <?php if($article->author): ?>
                                 <span class="author">By: <?php $article->author() ?> on <?php $article->the('pub_date') ?></span>
-                            <?php else: ?>
-                                <span class="date">Published: <?php $article->the('pub_date') ?></span>
                             <?php endif; ?>
                         </div><!-- .details -->
                         <div class="content"><?php $article->the_summary(2) ?></div>
