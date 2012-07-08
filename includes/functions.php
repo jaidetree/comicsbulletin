@@ -15,7 +15,8 @@ function slugify($str)
 function is_page($controller)
 {
    $test_url = APP::url($controller);
-   $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+   $uri = preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']);
+   $url = 'http://' . $_SERVER['HTTP_HOST'] . $uri;
 
    if( $url == $test_url )
    {

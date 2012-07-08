@@ -10,7 +10,6 @@
                         </header>
                         <div class="content">
                             <h2><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h2>
-                            <p><?php $article->the_summary(1); ?></p>
                             <div class="by">Reviewd by <?php $article->author(); ?></div>
                             <div class="date">
                                 <?php $article->the_type(); ?>

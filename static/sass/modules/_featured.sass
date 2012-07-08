@@ -1,3 +1,66 @@
 section.featured
-  background: #7f1212
-  height: 380px
+  :height 380px
+  :color #fff
+  :background #7F1212
+  :position relative
+  :overflow hidden
+  > .container
+    :width 940px
+    :margin 0 auto
+    :position relative
+    .story-box
+      :position absolute
+      :display block
+      :background #7F1212
+      :padding 40px
+      :padding-right 0
+      :left 400px
+      :right 0
+      :height 300px
+      :z-index 50
+    .total
+      :position absolute
+      :background #ccc
+      :height 5px
+      :width 100%
+      :left 0
+      :bottom 0
+      .progress
+        :background #000
+        :height 5px
+        :display block
+  ol
+    :background #000
+    :padding 20px 0
+    :height 340px
+    li
+      a
+        :color #fff
+        :font-size 25px
+        :padding 10px 
+        :display block
+        &:hover
+          :color #ccc
+          :text-decoration none
+      .title
+        :width 400px
+      .story
+        @include transition(right, 800ms)
+        :position absolute
+        :right -6000px
+        :z-index 100
+        :top 40px
+        :max-width 500px
+        .image
+          img
+            :max-width 500px
+            :max-height 260px
+      &.active
+        .title
+          :background #7F1212
+          a
+            :color #000
+        .story
+          @include transition(right, 800ms)
+          :right 0px
+

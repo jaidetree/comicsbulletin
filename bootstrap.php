@@ -15,6 +15,7 @@ $files = array(
     "manager.class.php",
     "model.class.php",
     "error.class.php",
+    "pagination.class.php"
 );
 
 /**

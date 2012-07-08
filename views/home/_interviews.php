@@ -10,7 +10,6 @@
                         </header>
                         <div class="content">
                             <h3><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h3>
-                            <p><?php $article->the_summary(1); ?></p>
                             <div class="by"><?php $article->the_interviewee(); ?> Interviewed by <?php $article->author(); ?></div>
                         </div>
                     </article>

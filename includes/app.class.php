@@ -27,6 +27,7 @@ class APP
 
     public static function load_route($url)
     {
+        $url = preg_replace('/\?.*$/', '', $url);
         foreach( self::$urls as $route )
         {
             if( preg_match( '#' . $route[0] . '#', $url, $args ) )

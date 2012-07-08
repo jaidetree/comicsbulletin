@@ -10,7 +10,7 @@ class Model
 
     private function build_data($data_array)
     {
-        foreach( $data_array as $key => $value )
+        foreach( (array)$data_array as $key => $value )
         {
             $this->$key = $value;
         }
@@ -30,6 +30,15 @@ class Model
     public function the($key)
     {
         echo $this->_data[$key];
+    }
+
+    public function is_first()
+    {
+        if( $this->index == 0 )
+        {
+            return true;
+        }
+        return false;
     }
 }
 ?>

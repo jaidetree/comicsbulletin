@@ -14,7 +14,7 @@
       title: '',
       subject: '',
       width: 'auto',
-      height: '1000',
+      height: '1100',
       theme: {
         shell: {
           background: '#ffffff',

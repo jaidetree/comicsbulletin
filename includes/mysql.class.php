@@ -151,7 +151,7 @@ class MySQL extends DataBase
             {
                 $str .= $vars[0];
             }
-            elseif( $item == "LIKE" || $item == "IS NULL" || $item == "IS NOT NULL" )
+            elseif( $item == "LIKE" || $item == "IS NULL" || $item == "IS NOT NULL" || $item == "AND" || $item == "OR" )
             {
                 $str .= $item;
             }
@@ -165,7 +165,7 @@ class MySQL extends DataBase
             }
             else
             {
-                $str .= "'" . $item . "'";
+                $str .= "'" . $this->escape($item) . "'";
             }
 
             $statement .= $str;
@@ -550,7 +550,7 @@ class MySQL extends DataBase
 			return $string;
 		}
 		
-		return mysql_real_escape_string($string, $this->link);
+		return $this->db->real_escape_string($string);
 	}
 		
 	function create_table( $a )

@@ -36,7 +36,7 @@
     <li><a href="<?php echo APP::url('pages.archive'); ?>" class="<?php is_page('pages.archive'); ?>">Archive</a></li>
 </ul>
 <ul class="social-links col-2">
-    <li><a href="#/rss/">RSS</a></li>
+    <li><a href="/main/rss.xml">RSS</a></li>
     <li><a class="fb" href="https://www.facebook.com/pages/Comics-Bulletin/22427511701">Facebook</a></li>
     <li><a class="tw" href="http://twitter.com/#!/ComicsBulletin">Twitter</a></li>
     <li><a class="tb" href="http://www.tumblr.com/tagged/comics+bulletin">Tumblr</a></li>

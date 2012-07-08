@@ -236,7 +236,8 @@ strong {
     padding: 5px; }
     .l-footer nav li a {
       color: #dddddd;
-      line-height: 30px; }
+      line-height: 30px;
+      font-size: 11px; }
   .l-footer .columns ul {
     margin-right: -40px;
     font-size: 0; }
@@ -311,8 +312,10 @@ article .details {
     width: 620px;
     border-bottom: 1px solid #999999; }
     .articles li article header .cover, .comics li article header .cover, .tv li article header .cover, .movies li article header .cover, .games li article header .cover, .reviews li article header .cover, .interviews li article header .cover {
-      width: 140px;
-      height: auto; }
+      max-width: 140px;
+      width: auto;
+      height: auto;
+      max-height: 300px; }
     .articles li article .content, .comics li article .content, .tv li article .content, .movies li article .content, .games li article .content, .reviews li article .content, .interviews li article .content {
       width: 440px;
       margin-left: 5px;
@@ -330,8 +333,75 @@ article .details {
   margin-bottom: 40px; }
 
 section.featured {
+  height: 380px;
+  color: white;
   background: #7f1212;
-  height: 380px; }
+  position: relative;
+  overflow: hidden; }
+  section.featured > .container {
+    width: 940px;
+    margin: 0 auto;
+    position: relative; }
+    section.featured > .container .story-box {
+      position: absolute;
+      display: block;
+      background: #7f1212;
+      padding: 40px;
+      padding-right: 0;
+      left: 400px;
+      right: 0;
+      height: 300px;
+      z-index: 50; }
+    section.featured > .container .total {
+      position: absolute;
+      background: #cccccc;
+      height: 5px;
+      width: 100%;
+      left: 0;
+      bottom: 0; }
+      section.featured > .container .total .progress {
+        background: black;
+        height: 5px;
+        display: block; }
+  section.featured ol {
+    background: black;
+    padding: 20px 0;
+    height: 340px; }
+    section.featured ol li a {
+      color: white;
+      font-size: 25px;
+      padding: 10px;
+      display: block; }
+      section.featured ol li a:hover {
+        color: #cccccc;
+        text-decoration: none; }
+    section.featured ol li .title {
+      width: 400px; }
+    section.featured ol li .story {
+      -webkit-transition: right 800ms ease;
+      -moz-transition: right 800ms ease;
+      -ms-transition: right 800ms ease;
+      -o-transition: right 800ms ease;
+      transition: right 800ms ease;
+      position: absolute;
+      right: -6000px;
+      z-index: 100;
+      top: 40px;
+      max-width: 500px; }
+      section.featured ol li .story .image img {
+        max-width: 500px;
+        max-height: 260px; }
+    section.featured ol li.active .title {
+      background: #7f1212; }
+      section.featured ol li.active .title a {
+        color: black; }
+    section.featured ol li.active .story {
+      -webkit-transition: right 800ms ease;
+      -moz-transition: right 800ms ease;
+      -ms-transition: right 800ms ease;
+      -o-transition: right 800ms ease;
+      transition: right 800ms ease;
+      right: 0px; }
 
 .reviews header .rating {
   background: rgba(255, 255, 255, 0.9);
@@ -419,12 +489,38 @@ section.featured {
   .secondary .columns li {
     margin-bottom: 80px; }
     .secondary .columns li article {
-      padding-top: 120px;
-      background-position: center center;
-      background-size: cover; }
-      .secondary .columns li article div {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      overflow: hidden; }
+      .secondary .columns li article .cover {
+        background-position: center center;
+        background-size: cover;
+        width: 300px;
+        height: 300px; }
+      .secondary .columns li article > div {
+        width: 100%;
         background: white;
-        background: rgba(255, 255, 255, 0.8); }
+        padding-top: 10px;
+        position: absolute;
+        bottom: 0;
+        height: auto;
+        -webkit-transition: all 400ms ease;
+        -moz-transition: all 400ms ease;
+        -ms-transition: all 400ms ease;
+        -o-transition: all 400ms ease;
+        transition: all 400ms ease; }
+        .secondary .columns li article > div span {
+          position: static;
+          margin-top: 20px;
+          display: block; }
+      .secondary .columns li article:hover > div {
+        bottom: -100%;
+        -webkit-transition: all 400ms ease;
+        -moz-transition: all 400ms ease;
+        -ms-transition: all 400ms ease;
+        -o-transition: all 400ms ease;
+        transition: all 400ms ease; }
     .secondary .columns li a {
       font-size: 22px;
       font-weight: normal; }
@@ -507,6 +603,9 @@ section.featured {
   border-bottom: 1px solid #999999;
   margin-bottom: 40px;
   padding-bottom: 20px; }
+  #page-article .main .story img {
+    max-width: 600px;
+    height: auto; }
 #page-article .main .comments > h2 {
   font-size: 36px; }
 #page-article .main .type {
@@ -544,6 +643,35 @@ section.featured {
     height: auto;
     display: none; }
 
+#page-archives .year {
+  margin-bottom: 40px; }
+#page-archives .months li {
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  line-height: 30px;
+  margin: 12px 5px; }
+  #page-archives .months li span {
+    float: right; }
+  #page-archives .months li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: #e5e5e5;
+    padding: 5px 10px; }
+    #page-archives .months li a:hover {
+      background: #a72011;
+      color: white; }
+
+#page-archive .archive li {
+  display: inline-block;
+  width: 420px;
+  margin-right: 20px;
+  vertical-align: top; }
+
 .l-header .search {
   text-align: right; }
   .l-header .search input {
@@ -569,7 +697,7 @@ section.featured {
     .l-header .search input[type="submit"] {
       border: none;
       margin-left: -5px;
-      background: #6c150a;
+      background: #6c150a url(/static/images/search.png) no-repeat center center;
       width: 40px;
       text-indent: -999px;
       -moz-border-radius-topleft: 0;
@@ -611,3 +739,18 @@ section.featured {
   display: none; }
   .tabs section.active {
     display: block; }
+
+.pagination {
+  text-align: right;
+  margin: 20px 0; }
+  .pagination li {
+    display: inline-block; }
+    .pagination li a.active {
+      font-weight: bold;
+      color: black; }
+    .pagination li a span {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      font-weight: bold; }
+    .pagination li a.last span, .pagination li a.first span {
+      letter-spacing: -3px; }

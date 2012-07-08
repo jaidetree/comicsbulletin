@@ -20,6 +20,10 @@ class Manager
 
     public function add_item($item)
     {
+        if( is_array( $item ) )
+        {
+            $item['index'] = $this->count;
+        }
         $this->_data[] = $item;
         $this->count++;
     }
@@ -65,6 +69,11 @@ class Manager
     public function first()
     {
         return $this->_data[0];
+    }
+
+    public function index()
+    {
+        return $this->index;
     }
 }
 

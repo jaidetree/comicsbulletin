@@ -2,6 +2,7 @@
 class Articles extends Manager
 {
     var $model = 'Article';
+    var $paginator = null;
     public function __construct($index=0, $count=10, $args = array())
     {
         $this->query = array(
@@ -16,16 +17,11 @@ class Articles extends Manager
                 array(
                     'from' => array(DB_PRE . 'node_counter' => 'c'),
                     'on' => 'c.`nid` = n.`nid`',
-                    'select' => 'c.totalcount, c.daycount, c.timestamp as count_timestamp'
-                ),
-                array(
-                    'from' => array(DB_PRE . 'field_data_field_pubdate_int' => 'd'),
-                    'on' => 'd.`entity_id` = n.`nid`',
-                    'select' => "d.field_pubdate_int_value as pub_date, UNIX_TIMESTAMP(STR_TO_DATE(d.`field_pubdate_int_value`, '%M %d, %Y')) as date_int",
-                    'type' => 'left',
-                ),
+                    'select' => 'c.totalcount, c.daycount, c.timestamp as count_timestamp',
+                    'type' => 'left'
+                )
             ),
-            'order' => "UNIX_TIMESTAMP(STR_TO_DATE(d.`field_pubdate_int_value`, '%M %d, %Y')), n.`created` DESC",
+            'order' => "n.`created` DESC",
             'limit' => "$index,$count",
         );
 
@@ -75,7 +71,7 @@ class Articles extends Manager
                     'type' => 'left'
                 ),
             ),
-            'order' => 'n.`nid` DESC',
+            'order' => 'n.`created` DESC',
             'limit' => "$index,$count",
             'where' => "cn.`field_column_type_value` = 'Comic Column'" .
                 " OR it.field_interview_type_value = 'Comics Interview'" .
@@ -129,7 +125,7 @@ class Articles extends Manager
                     'type' => 'left'
                 ),
             ),
-            'order' => 'n.`nid` DESC',
+            'order' => 'n.`created` DESC',
             'limit' => "$index,$count",
             'where' => "cn.`field_column_type_value` = 'TV Column'" .
                 " OR it.field_interview_type_value = 'TV Interview'" .
@@ -182,7 +178,7 @@ class Articles extends Manager
                     'type' => 'left'
                 ),
             ),
-            'order' => 'n.`nid` DESC',
+            'order' => 'n.`created` DESC',
             'limit' => "$index,$count",
             'where' => "cn.`field_column_type_value` = 'Movie Column'" .
                 " OR it.field_interview_type_value = 'Movie Interview'" .
@@ -236,7 +232,7 @@ class Articles extends Manager
                     'type' => 'left'
                 ),
             ),
-            'order' => 'n.`nid` DESC',
+            'order' => 'n.`created` DESC',
             'limit' => "$index,$count",
             'where' => "cn.`field_column_type_value` = 'Game Column'" .
                 " OR it.field_interview_type_value = 'Game Interview'" .
@@ -246,10 +242,76 @@ class Articles extends Manager
 
         return new Articles($index, $count, $query);
     }                                      
+    public static function author($name, $index=0, $count=10)
+    {
+        $name = APP::$db->escape( strtolower( $name ) );
+        $query = array(
+            'select' => 'n.*, n.`type` as node_type', 
+            'from' => array( DB_PRE . 'node' => 'n' ),
+            'joins' => array(
+                array(
+                    'from' => array(DB_PRE . 'field_data_body' => 'b'),
+                    'on' => 'b.`entity_id` = n.`nid`',
+                    'select' => 'b.body_value, b.body_summary',
+                    'type' => 'left'
+                ), 
+                array(
+                    'from' => array(DB_PRE . 'field_data_field_columnist' => 'ac'),
+                    'on' => 'ac.`entity_id` = n.`nid`',
+                    'select' => 'ac.field_columnist_value',
+                    'type' => 'left'
+                ),
+                array(
+                    'from' => array(DB_PRE . 'field_data_field_interviewer' => 'ai'),
+                    'on' => 'ai.`entity_id` = n.`nid`',
+                    'select' => 'ai.field_interviewer_value',
+                    'type' => 'left'
+                ),
+                array(
+                    'from' => array(DB_PRE . 'field_data_field_reviewer' => 'ar'),
+                    'on' => 'ar.`entity_id` = n.`nid`',
+                    'select' => 'ar.field_reviewer_value',
+                    'type' => 'left'
+                ),
+                array(
+                    'from' => array(DB_PRE . 'field_data_field_guest_columnist' => 'ag'),
+                    'on' => 'ag.`entity_id` = n.`nid`',
+                    'select' => 'ag.field_guest_columnist_value',
+                    'type' => 'left'
+                ),
+            ),
+            'order' => 'n.`created` DESC',
+            'limit' => "$index,$count",
+            'where' => "LCASE(ac.`field_columnist_value`) = '$name'" .
+                " OR LCASE(ai.`field_interviewer_value`) = '$name'" .
+                " OR LCASE(ar.`field_reviewer_value`) = '$name'" .
+                " OR LCASE(ag.`field_guest_columnist_value`) = '$name'"
+        );
+
+        return new Articles($index, $count, $query);
+    }                                      
 
     public function get($args=array())
     {
         $this->query = array_merge($this->query, $args);
+        $this->paginator = new Pagination($this->query, array( 
+            'select' => 'n.`nid`',
+        ));
+        $this->query['limit'] = $this->paginator->limit();
+
+        if( $this->query['where'] && is_array( $this->query['where'] ) )
+        {
+            array_push( $this->query['where'], 'AND', 'n.status', '=', '1' );
+        }
+        elseif ( $this->query['where'] && is_string( $this->query['where'] ) )
+        {
+            $this->query['where'] .= " AND n.`status` = 1";
+        }
+        elseif( ! $this->query['where'] )
+        {
+            $this->query['where'] = "n.`status` = 1";
+        }
+
         $result = APP::$db->build_run_query($this->query);
 
         while( $row = APP::$db->fetch($result) )
@@ -348,6 +410,15 @@ class Articles extends Manager
             $data = new ImageFields('cover_image', $row['nid']);
             $row['cover_image'] = str_replace( ' ', '%20', $data->first() );
 
+            if( ! $row['cover_image'] && $row['column_logo'] )
+            {
+                $row['cover_image'] = $row['column_logo'];
+            }
+            if( ! $row['cover_image'] && $row['image'] )
+            {
+                $row['cover_image'] = $row['image'];
+            }
+
             $row['details'] = array();
 
             $this->get_field($row, 'colorist', 'first');
@@ -374,6 +445,12 @@ class Articles extends Manager
             $this->get_field($row, 'tv_series_title', 'first');
 
             $row['body_value'] = str_replace('"/main/', '"http://' . APP::cfg('dr', 'url_base'), $row['body_value']);
+
+            if( ! $row['cover_image'] )
+            {
+                $src = preg_match("/\<img.*src=\"(.*)\".*/iU", $row['body_value'], $data);
+                $row['cover_image'] = $data[1];
+            }
             $this->_data[] = $row;
             $this->count++;
         }
@@ -409,7 +486,13 @@ class Article extends Model
 
     public function author($function=false)
     {
-        echo join(', ', (array)$this->author);
+        $authors = (array)$this->author;
+        foreach( $authors as $i => $author )
+        {
+            $url = APP::url('articles.author', array( urlencode(strtolower($author)) ));
+            $authors[$i] = "<a href=\"$url\">" . $author . "</a>";
+        }
+        echo join(', ', $authors);
     }
 
     public function the_summary($length)
@@ -448,17 +531,17 @@ class Article extends Model
 
     public function url()
     {
-        echo APP::url($this->controller, array( $this->node_type . 's', $this->nid, slugify($this->title) ));
+        echo APP::url($this->controller, array( $this->node_type . (( $this->node_type != "news" ) ? 's' : '' ), $this->nid, slugify($this->title) ));
     }
 
     public function drupal_url()
     {
-        echo APP::drupal_url( slugify($this->node_type) . 's/' . slugify( $this->title ) );
+        echo APP::drupal_url( slugify($this->node_type) . (( $this->node_type != "news" ) ? 's/' : '/' ) . slugify( $this->title ) );
     }
 
     public function disqus_url()
     {
-        echo APP::disqus_url( slugify($this->node_type) . 's/' . slugify( $this->title ) );
+        echo APP::disqus_url( slugify($this->node_type) . (( $this->node_type != "news" ) ? 's/' : '/' ) . slugify( $this->title ) );
     }
 
     public function the_type($str_function=false)

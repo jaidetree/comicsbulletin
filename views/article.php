@@ -1,10 +1,10 @@
-<?php echo render('_header') ?>
+<?php echo render('_header', array( 'page_title' => $article->title )); ?>
 <div class="grid" id="page-article">
     <div class="row">
         <section class="main col-8">
             <article>
                 <h1><?php $article->the('title'); ?></h1>
-                <span class="type">A <?php $article->the_type('strtolower'); ?> by: <strong><?php $article->author(); ?></strong></span>
+                <span class="type">A <?php $article->the_type('strtolower'); ?> <?php if( $article->author ): ?>by: <strong><?php $article->author(); ?></strong><?php endif; ?></span>
                 <div class="story">
                     <?php $article->the('body_value'); ?>
                 </div><!-- story -->

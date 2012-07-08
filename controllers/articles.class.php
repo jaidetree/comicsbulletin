@@ -3,8 +3,18 @@ class ArticlesController extends Controller
 {
     function show($article_type, $article_id, $article_slug)
     {
-        $article = new Articles(0, 1, array( 'where' => array( 'n.nid', '=', $article_id )));
-        return render('article', array( 'article' => new Article($article->first()) ));
+        $articles = new Articles(0, 1, array( 'where' => array( 'n.nid', '=', $article_id )));
+        $article = new Article($articles->first());
+        APP::$db->build_run_query(array(
+            'update' => 'dr_node_counter',
+            'fields' => array(
+                'totalcount' => '`totalcount` + 1',
+                'daycount' => '`daycount` + 1',
+            ),
+            'where' => "`nid` = $article->nid"
+        ));
+
+        return render('article', array( 'article' => $article ));
     }
 
     function comics()
@@ -51,6 +61,20 @@ class ArticlesController extends Controller
     {
         $articles = new Articles(0, 20, array('where' => array( 'n.type', '=', 'news' )));
         return render('news', array( 'class' => 'news', 'title' => 'News', 'articles' => $articles ) );
+    }
+    function search($search_query)
+    {
+        $query = APP::$db->escape(strtolower(urldecode( $search_query )));
+        $articles = new Articles(0, 10, array('where' => 
+            "(LCASE(b.`body_value`) LIKE '%" . $query . "%' OR LCASE(n.`title`) LIKE '%" . $query . "%' OR LCASE(n.`type`) LIKE '%" . $query . "%')"
+        ));
+        return render('articles', array( 'class' => 'search', 'title' => 'Search &ldquo;' . strip_tags($search_query) . '&rdquo;', 'articles' => $articles ) );
+    }
+    function author($name)
+    {
+        $name = urldecode($name);
+        $articles = Articles::author($name);
+        return render('articles', array( 'class' => 'author', 'title' => 'Articles by ' . $name, 'articles' => $articles ) );
     }
 }
 ?>

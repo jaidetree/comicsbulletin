@@ -1,6 +1,5 @@
 function twitterCallback2(twitters) {
     twitters = twitters.results;
-    console.log(twitters);
     var statusHTML = [];
     for (var i=0; i<twitters.length; i++){
         var username = twitters[i].from_user;

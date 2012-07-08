@@ -1,8 +1,29 @@
 <?php echo render('_header.php'); ?>
-<section class="featured">
-    <ol>
-
-    </ol>
+<section class="featured" id="rotator">
+    <div class="container">
+        <div class="story-box">
+            <span class="total">
+                <span class="progress"></span>
+            </span>
+        </div><!-- .story-box -->
+        <ol>
+            <?php while( $featured->has_rows() ): $article = $featured->row(); ?>
+            <li>
+                <div class="title">
+                    <h2><a href="<?php $article->url(); ?>"><?php $article->the('title'); ?></a></h2>
+                </div><!-- .title -->
+                <div class="story">
+                    <span class="image">
+                        <a href="<?php $article->url(); ?>"><img src="<?php $article->the('slider_image'); ?>" /></a>
+                    </span><!-- .image -->
+                    <p class="caption">
+                        <?php $article->the('slider_caption'); ?>
+                    </p>
+                </div><!-- .story -->
+            </li>
+            <?php endwhile; ?>
+        </ol>
+    </div><!-- .container -->
 </section>
 <div class="grid">
     <div class="row">
@@ -40,7 +61,7 @@
         <div class="row">
             <nav class="col-12">
                 <ul>
-                    <li class="active"><a href="#!/columns">Newest Coumns</a></li>
+                    <li class="active"><a href="#!/columns">Newest Columns</a></li>
                     <li><a href="#!/reviews">Latest Reviews</a></li>
                     <li><a href="#!/interviews">Recent Interviews</a></li>
                     <li><a href="#!/news">Fresh News</a></li>
@@ -68,10 +89,20 @@
         </div><!-- .col-6 -->
     </div>
 </div><!-- .grid -->
+<script type="text/javascript" src="/static/js/rotator.js"></script>
 <script type="text/javascript" src="/static/js/twitter.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){ 
-        $('.tabs a').on('click', function(){
+        var hash = window.location.hash;
+        if( $('.tabs nav a[href="' + hash + '"]').length )
+        {    
+            $('.tabs .active').removeClass('active');
+            $('.tabs nav a[href="' + hash + '"]').parents('li').addClass('active');
+            var index = $('.tabs nav a[href="' + hash + '"]').parents('li').index();
+            $('.tabs section:eq(' + index + ')').addClass('active');
+
+        }
+        $('.tabs nav a').on('click', function(){
             var object = $('.tabs .active');
             object.removeClass('active');
             var index = $(this).parents('li').index();
@@ -79,12 +110,8 @@
 
             $('.tabs section:eq(' + index + ')').addClass('active');
         });
+        var rotator = new Rotator($('.featured'), {});
     });
-
-    function twitterCallback(data)
-    {
-        alert(data);
-    }
 </script>
 <script type="text/javascript" src="http://search.twitter.com/search.json?q=@comicsbulletin&rpp=10&include_entities=true&result_type=recent&show_user=true&callback=twitterCallback2"></script>
 <?php echo render('_footer.php'); ?>

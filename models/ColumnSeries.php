@@ -108,12 +108,17 @@ class ColumnSeries extends Manager
 
     public function get($args=array())
     {
+        include ROOT . 'config/hide_columns.php';
         $this->query = array_merge($this->query, $args);
         $result = APP::$db->build_run_query($this->query);
 
         while( $row = APP::$db->fetch($result) )
         {
             $row['slug'] = slugify( $row['title'] );
+            if( in_array( $row['slug'], $hide_columns ) )
+            {
+                continue;
+            }
             $this->_data[] = $row;
             $this->count++;
         }
